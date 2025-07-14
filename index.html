@@ -4,73 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory Game</title>
+    <title>Jogo da memória</title>
     <link rel="stylesheet" href="style.css">
     </link>
 </head>
 
 <body>
-    <header>
-        <h1 id="texto"></h1>
-        </h1>
-    </header>
 
-    <div id="container">
-        <div class="carta" id="carta1" onclick="virarCarta(1)">
-            <div id="frente1" class="frente"></div>
-            <div id="verso1" class="verso"></div>
-        </div>
-        <div class="carta" id="carta2" onclick="virarCarta(2)">
-            <div id="frente2" class="frente"></div>
-            <div id="verso2" class="verso"></div>
-        </div>
-        <div class="carta" id="carta3" onclick="virarCarta(3)">
-            <div id="frente3" class="frente"></div>
-            <div id="verso3" class="verso"></div>
-        </div>
-        <div class="carta" id="carta4" onclick="virarCarta(4)">
-            <div id="frente4" class="frente"></div>
-            <div id="verso4" class="verso"></div>
-        </div>
-        <div class="carta" id="carta5" onclick="virarCarta(5)">
-            <div id="frente5" class="frente"></div>
-            <div id="verso5" class="verso"></div>
-        </div>
-        <div class="carta" id="carta6" onclick="virarCarta(6)">
-            <div id="frente6" class="frente"></div>
-            <div id="verso6" class="verso"></div>
-        </div>
-        <div class="carta" id="carta7" onclick="virarCarta(7)">
-            <div id="frente7" class="frente"></div>
-            <div id="verso7" class="verso"></div>
-        </div>
-        <div class="carta" id="carta8" onclick="virarCarta(8)">
-            <div id="frente8" class="frente"></div>
-            <div id="verso8" class="verso"></div>
-        </div>
-        <div class="carta" id="carta9" onclick="virarCarta(9)">
-            <div id="frente9" class="frente"></div>
-            <div id="verso9" class="verso"></div>
-        </div>
-        <div class="carta" id="carta10" onclick="virarCarta(10)">
-            <div id="frente10" class="frente"></div>
-            <div id="verso10" class="verso"></div>
-        </div>
-        <div class="carta" id="carta11" onclick="virarCarta(11)">
-            <div id="frente11" class="frente"></div>
-            <div id="verso11" class="verso"></div>
-        </div>
-        <div class="carta" id="carta12" onclick="virarCarta(12)">
-            <div id="frente12" class="frente"></div>
-            <div id="verso12" class="verso"></div>
-        </div>
+    <div id="inicio">
+        <div id="titulo">APT.</div>
+        <div id="subtitulo">JOGO DA MEMÓRIA</div>
+        <button id="iniciar">Iniciar Jogo</button>
     </div>
 
-    <footer>
-        <p id="tempo"></p>
-        <button id="iniciar">Iniciar
-            Jogo</button>
-    </footer>
+    <div id="contagem">
+        <h1 id="texto"></h1>
+    </div>
+
+    <div id="pagPrincipal" style="display: none;">
+        <div id="container">
+            <div class="carta" id="carta1" onclick="virarCarta(1)">
+                <div id="frente1" class="frente"></div>
+                <div id="verso1" class="verso"></div>
+            </div>
+            <div class="carta" id="carta2" onclick="virarCarta(2)">
+                <div id="frente2" class="frente"></div>
+                <div id="verso2" class="verso"></div>
+            </div>
+            <div class="carta" id="carta3" onclick="virarCarta(3)">
+                <div id="frente3" class="frente"></div>
+                <div id="verso3" class="verso"></div>
+            </div>
+            <div class="carta" id="carta4" onclick="virarCarta(4)">
+                <div id="frente4" class="frente"></div>
+                <div id="verso4" class="verso"></div>
+            </div>
+            <div class="carta" id="carta5" onclick="virarCarta(5)">
+                <div id="frente5" class="frente"></div>
+                <div id="verso5" class="verso"></div>
+            </div>
+            <div class="carta" id="carta6" onclick="virarCarta(6)">
+                <div id="frente6" class="frente"></div>
+                <div id="verso6" class="verso"></div>
+            </div>
+            <div class="carta" id="carta7" onclick="virarCarta(7)">
+                <div id="frente7" class="frente"></div>
+                <div id="verso7" class="verso"></div>
+            </div>
+            <div class="carta" id="carta8" onclick="virarCarta(8)">
+                <div id="frente8" class="frente"></div>
+                <div id="verso8" class="verso"></div>
+            </div>
+            <div class="carta" id="carta9" onclick="virarCarta(9)">
+                <div id="frente9" class="frente"></div>
+                <div id="verso9" class="verso"></div>
+            </div>
+            <div class="carta" id="carta10" onclick="virarCarta(10)">
+                <div id="frente10" class="frente"></div>
+                <div id="verso10" class="verso"></div>
+            </div>
+            <div class="carta" id="carta11" onclick="virarCarta(11)">
+                <div id="frente11" class="frente"></div>
+                <div id="verso11" class="verso"></div>
+            </div>
+            <div class="carta" id="carta12" onclick="virarCarta(12)">
+                <div id="frente12" class="frente"></div>
+                <div id="verso12" class="verso"></div>
+            </div>
+            <div class="carta" id="carta13" onclick="virarCarta(12)">
+                <div id="frente13" class="frente"></div>
+                <div id="verso13" class="verso"></div>
+            </div>
+            <div class="carta" id="carta14" onclick="virarCarta(12)">
+                <div id="frente14" class="frente"></div>
+                <div id="verso14" class="verso"></div>
+            </div>
+            <div class="carta" id="carta15" onclick="virarCarta(12)">
+                <div id="frente15" class="frente"></div>
+                <div id="verso15" class="verso"></div>
+            </div>
+            <div class="carta" id="carta16" onclick="virarCarta(12)">
+                <div id="frente16" class="frente"></div>
+                <div id="verso16" class="verso"></div>
+            </div>
+        </div>
+        <div id="emBaixo">
+            <p id="tempo"></p>
+        </div>
+    </div>
     <script src="script.js"></script>
 
 </body>

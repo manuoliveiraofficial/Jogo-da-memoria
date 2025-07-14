@@ -1,13 +1,14 @@
 // Lista de cartas disponíveis no jogo
-let cartas = [1, 2, 3, 4, 5, 6];
+let cartas = [1, 2, 3, 4, 5, 6, 7, 8];
 
 // Variáveis globais para controle do jogo
 let cartasEmbaralhadas = []; // Armazena as cartas duplicadas e embaralhadas
-let paresRestantes = 6; // Total de pares a serem encontrados
+let paresRestantes = 8; // Total de pares a serem encontrados
 let tempoRestante = 60; // Tempo total do jogo (segundos)
 let cartasViradas = []; // Guarda as cartas viradas temporariamente
 let cartaAVirar = 1; // Controla a ordem das cartas viradas
 let tempoIntervalo = null; // Referência do setInterval para parar depois
+const titulo = document.getElementById('titulo'); //título principal
 
 // Função para organizar as cartas
 function organizarCartas() {
@@ -15,7 +16,7 @@ function organizarCartas() {
   cartasEmbaralhadas.sort(() => Math.random() - 0.5); // embaralha as cartas
 
   // Define as imagens das cartas viradas para baixo
-  for (let i = 1; i <= 12; i++) {
+  for (let i = 1; i <= 16; i++) {
     let frente = document.getElementById(`frente${i}`);
     let carta = cartasEmbaralhadas[i - 1];
     frente.style.backgroundImage = `url(cartas/carta${carta}.png)`;
@@ -91,7 +92,13 @@ function verificarPar() {
 // Esconde a carta após encontrar o par
 function ocultarCarta(numeroCarta) {
   let carta = document.getElementById(`carta${numeroCarta}`);
-  carta.style.display = 'none';
+  ocultarOuExibirDiv(carta, 'ocultar');
+}
+
+function ocultarOuExibirDiv(div, funcao) {
+  let elemento = document.getElementById(div);
+  if (funcao == 'exibir') elemento.style.display = 'flex';
+  if (funcao == 'ocultar') elemento.style.display = 'none';
 }
 
 // Função para controlar o tempo e exibir na tela
@@ -116,34 +123,77 @@ function contarTempo() {
 // Controla a contagem inicial de "PRONTO > 3 > 2 > 1 > VALENDO!"
 let textoAtual = 0;
 function atualizarTexto() {
-  let textos = ['PRONTO?', '3', '2', '1', 'VALENDO!'];
+  let textos = ['채영이가', '좋아하는', 'RANDOM', 'GAME', 'RANDOM', 'GAME', 'GAME', 'START!'];
   let texto = document.getElementById("texto");
 
-  if (textoAtual < textos.length) {
+  if (textoAtual <= textos.length) {
     texto.innerHTML = textos[textoAtual];
+    balancarTexto(texto, 700, 0.01, 2.5)
     textoAtual++;
   }
 }
 
 // Inicia o jogo após a contagem regressiva
 function iniciarJogo() {
-  let textoIntervalo = setInterval(atualizarTexto, 1000); 
+  let textoIntervalo = setInterval(atualizarTexto, 750);
 
   setTimeout(() => {
     clearInterval(textoIntervalo);
-
+    ocultarOuExibirDiv('pagPrincipal', 'exibir');
+    ocultarOuExibirDiv('contagem', 'ocultar')
     organizarCartas(); // embaralha e mostra as cartas
 
     // Inicia o cronômetro do jogo
     tempoIntervalo = setInterval(contarTempo, 1000);
-  }, 5000); // espera os 5 segundos da contagem
+  }, 6750); // espera os 5 segundos da contagem
 }
 
 // Ao clicar no botão "iniciar", o jogo começa
 let iniciar = document.getElementById('iniciar');
 iniciar.addEventListener("click", () => {
-  let tempo = document.getElementById('tempo');
-  iniciar.style.display = 'none'; // esconde o botão
-  tempo.style.display = 'block';  // mostra o cronômetro
+  ocultarOuExibirDiv('inicio', 'ocultar') // esconde o botão
+  ocultarOuExibirDiv('contagem', 'exibir');  // mostra o cronômetro
   iniciarJogo(); // chama o início do jogo
 });
+
+
+titulo.addEventListener("mouseover", () => {
+  balancarTexto(titulo, 0.1)
+})
+
+titulo.addEventListener("mouseout", () => {
+  titulo.style.transform = "scale(1)"; // volta ao normal
+});
+
+function balancarTexto(texto, velocidade, aumentoEscala = 0.05, limite = 1.10) {
+  let escala = 1;
+  let crescendo = true;
+
+  const intervalo = setInterval(() => {
+    if (crescendo) {
+      escala += aumentoEscala;
+      if (escala >= limite) crescendo = false;
+    } else {
+      escala -= aumentoEscala; // mesmo ritmo que o aumento
+      if (escala <= 1) crescendo = true;
+    }
+    texto.style.transform = `scale(${escala})`;
+  }, velocidade);
+
+  return intervalo; // permite parar depois com clearInterval
+}
+
+function adicionarElementosCaindo() {
+  for (let i = 0; i <= 6; i++) {
+    const elemento = document.createElement('div');
+    elemento.classList.add('elementoCaindo');
+    elemento.style.position = 'fixed';
+    elemento.style.top = '0px';
+    elemento.style.backgroundImage = `url(elementos/elemento1.png)`
+    elemento.style.left = `${15 * i}%`;
+    document.body.appendChild(elemento);
+
+  }
+}
+
+setInterval(adicionarElementosCaindo, 600);
