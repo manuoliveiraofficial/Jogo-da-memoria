@@ -8,7 +8,10 @@ let tempoRestante = 60; // Tempo total do jogo (segundos)
 let cartasViradas = []; // Guarda as cartas viradas temporariamente
 let cartaAVirar = 1; // Controla a ordem das cartas viradas
 let tempoIntervalo = null; // Referência do setInterval para parar depois
+
+//Elementos HTML
 const titulo = document.getElementById('titulo'); //título principal
+const pares = document.getElementById('paresRestantes'); //Contador de pares restantes
 
 // Função para organizar as cartas
 function organizarCartas() {
@@ -55,6 +58,12 @@ function organizarVariaveis(numeroCarta) {
   cartasViradas.push(index); // armazena o índice da carta
   cartaAVirar++;
 
+
+  //Debug
+  console.table(cartasViradas);
+  console.log(`Cartas a virar: ${cartaAVirar}`);
+
+
   // Quando duas cartas forem viradas, verifica se formam par
   if (cartasViradas.length === 2) {
     setTimeout(verificarPar, 1000);
@@ -70,6 +79,7 @@ function verificarPar() {
 
   if (cartasEmbaralhadas[primeira] === cartasEmbaralhadas[segunda]) {
     paresRestantes--; // diminui a contagem de pares
+    pares.innerHTML = `Pares restantes: ${paresRestantes} `;
     ocultarCarta(primeira + 1);
     ocultarCarta(segunda + 1);
   } else {
@@ -91,11 +101,18 @@ function verificarPar() {
 
 // Esconde a carta após encontrar o par
 function ocultarCarta(numeroCarta) {
+
+  console.log(`Carta a ser oculta: ${numeroCarta}`);
+
   let carta = document.getElementById(`carta${numeroCarta}`);
-  ocultarOuExibirDiv(carta, 'ocultar');
+  ocultarOuExibirDiv(carta.id, 'ocultar');
+    console.log(`Carta nº ${numeroCarta} ocultada`);
 }
 
 function ocultarOuExibirDiv(div, funcao) {
+
+  console.log(`Elemento a ser oculto: ${div}`);
+  
   let elemento = document.getElementById(div);
   if (funcao == 'exibir') elemento.style.display = 'flex';
   if (funcao == 'ocultar') elemento.style.display = 'none';
@@ -142,7 +159,6 @@ function iniciarJogo() {
     ocultarOuExibirDiv('pagPrincipal', 'exibir');
     ocultarOuExibirDiv('contagem', 'ocultar')
     organizarCartas(); // embaralha e mostra as cartas
-
     // Inicia o cronômetro do jogo
     tempoIntervalo = setInterval(contarTempo, 1000);
   }, 6750); // espera os 5 segundos da contagem
@@ -151,6 +167,7 @@ function iniciarJogo() {
 // Ao clicar no botão "iniciar", o jogo começa
 let iniciar = document.getElementById('iniciar');
 iniciar.addEventListener("click", () => {
+  pares.innerHTML = `Pares restantes: ${paresRestantes} `;
   ocultarOuExibirDiv('inicio', 'ocultar') // esconde o botão
   ocultarOuExibirDiv('contagem', 'exibir');  // mostra o cronômetro
   iniciarJogo(); // chama o início do jogo
