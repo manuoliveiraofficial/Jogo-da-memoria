@@ -12,6 +12,8 @@ let tempoIntervalo = null; // Referência do setInterval para parar depois
 //Elementos HTML
 const titulo = document.getElementById('titulo'); //título principal
 const pares = document.getElementById('paresRestantes'); //Contador de pares restantes
+const anuncio = document.getElementById('anuncio'); //Anúncio de vitória ou derrota
+const botaoReiniciar = document.getElementById('botaoReiniciar'); //Botão que reinicia o jogo
 
 // Função para organizar as cartas
 function organizarCartas() {
@@ -80,6 +82,10 @@ function verificarPar() {
   if (cartasEmbaralhadas[primeira] === cartasEmbaralhadas[segunda]) {
     paresRestantes--; // diminui a contagem de pares
     pares.innerHTML = `Pares restantes: ${paresRestantes} `;
+
+
+    if (paresRestantes <= 0) fimDeJogo('venceu');
+
     ocultarCarta(primeira + 1);
     ocultarCarta(segunda + 1);
   } else {
@@ -106,13 +112,13 @@ function ocultarCarta(numeroCarta) {
 
   let carta = document.getElementById(`carta${numeroCarta}`);
   ocultarOuExibirDiv(carta.id, 'ocultar');
-    console.log(`Carta nº ${numeroCarta} ocultada`);
+  console.log(`Carta nº ${numeroCarta} ocultada`);
 }
 
 function ocultarOuExibirDiv(div, funcao) {
 
   console.log(`Elemento a ser oculto: ${div}`);
-  
+
   let elemento = document.getElementById(div);
   if (funcao == 'exibir') elemento.style.display = 'flex';
   if (funcao == 'ocultar') elemento.style.display = 'none';
@@ -127,8 +133,7 @@ function contarTempo() {
   // Quando o tempo acaba, o jogador perde
   if (tempoRestante < 0) {
     clearInterval(tempoIntervalo);
-    let texto = document.getElementById("texto");
-    texto.innerHTML = "VOCÊ PERDEU";
+    fimDeJogo('perdeu');
 
     // Impede novas jogadas após derrota
     document.querySelectorAll(".carta").forEach(carta => {
@@ -164,6 +169,11 @@ function iniciarJogo() {
   }, 6750); // espera os 5 segundos da contagem
 }
 
+function fimDeJogo(resultado) {
+  anuncio.innerHTML = `Você ${resultado}`;
+  ocultarOuExibirDiv('paginaFinal', 'exibir');
+}
+
 // Ao clicar no botão "iniciar", o jogo começa
 let iniciar = document.getElementById('iniciar');
 iniciar.addEventListener("click", () => {
@@ -173,10 +183,13 @@ iniciar.addEventListener("click", () => {
   iniciarJogo(); // chama o início do jogo
 });
 
+botaoReiniciar.addEventListener("click", () => {
+  document.location.reload();
+});
 
 titulo.addEventListener("mouseover", () => {
   balancarTexto(titulo, 0.1)
-})
+});
 
 titulo.addEventListener("mouseout", () => {
   titulo.style.transform = "scale(1)"; // volta ao normal
