@@ -1,14 +1,15 @@
-# JOGO DA MEMÓRIA — APT. 
+# 🎲 JOGO DA MEMÓRIA — APT. 
 
 Este é um jogo da memória temático, inspirado em **APT. de Rosé e Bruno Mars**, com interações animadas e efeitos personalizados. Criado em **HTML**, **CSS** e **JavaScript puro**, é ideal para treinar lógica de programação e manipulação de elementos DOM.
 
-### STATUS: Em andamento
+> ➥ STATUS: Em andamento
 
 ---
 
 ## 📸 Prévia
 
-> ![Demonstração do Jogo](previa-jogo-da-memoria.mp4)
+> ![Demonstração do Jogo](previa-jogo-da-memoria.gif)
+
 ---
 
 ## 🎮 Como Jogar
@@ -65,3 +66,4 @@ Jogue e divirta-se! 🎲
 ## 👩‍💻 Autoria
 
 Desenvolvido por Manu Oliveira - Projeto autoral criado com foco em lógica, design e diversão.
+> Todas as artes do jogo são autorais. Não utilizar sem autorização.
